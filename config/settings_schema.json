@@ -1,0 +1,200 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Themekit template theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https://github.com/Shopify/themekit",
+    "theme_support_url": "https://github.com/Shopify/themekit/issues"
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "id": "topbar",
+        "type": "text",
+        "label": "Topbar Phone Number",
+        "default": "+2348172017830"
+      },
+      {
+        "id": "topbar_text",
+        "type": "text",
+        "label": "Topbar Phone Number",
+        "default": "Free Shipping for Orders over $300"
+      },
+      {
+        "id": "header_logo",
+        "type": "image_picker",
+        "label": "Header Logo"
+      },
+      {
+          "type": "header",
+          "content": "Navbar"
+      },
+      {
+          "id": "main_menu",
+          "type": "link_list",
+          "label": "Main Menu"
+      },
+      {
+          "type": "header",
+          "content": "Services"
+      },
+      {
+          "id": "main_menu_service_one_icon",
+          "type": "text",
+          "label": "Main Menu Service One Icon"
+      }
+    ]
+  },
+  {
+    "name": "Footer Services",
+    "settings": [
+        {
+          "type": "header",
+          "content": "First Column"
+        },
+        {
+          "id": "footer_first_column_icon",
+          "type": "text",
+          "label": "Footer First Column Icon"
+        },
+        {
+          "id": "footer_first_column_top_text",
+          "type": "text",
+          "label": "Footer First Column Top Text"
+        },
+        {
+          "id": "footer_first_column_bottom_text",
+          "type": "text",
+          "label": "Footer First Column Bottom Text"
+        },        
+        {
+          "type": "header",
+          "content": "Second Column"
+        },
+        {
+          "id": "footer_second_column_icon",
+          "type": "text",
+          "label": "Footer Second Column Icon"
+        },
+        {
+          "id": "footer_second_column_top_text",
+          "type": "text",
+          "label": "Footer Second Column Top Text"
+        },
+        {
+          "id": "footer_second_column_bottom_text",
+          "type": "text",
+          "label": "Footer Second Column Bottom Text"
+        },
+        {
+          "type": "header",
+          "content": "Third Column"
+        },
+        {
+          "id": "footer_third_column_icon",
+          "type": "text",
+          "label": "Footer Third Column Icon"
+        },
+        {
+          "id": "footer_third_column_top_text",
+          "type": "text",
+          "label": "Footer Third Column Top Text"
+        },
+        {
+          "id": "footer_third_column_bottom_text",
+          "type": "text",
+          "label": "Footer Third Column Bottom Text"
+        }            
+
+    ]
+  },
+  {
+    "name": "Footer Main",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Footer Logo"
+      },
+      {
+        "id": "footer_logo",
+        "type": "image_picker",
+        "label": "Footer Logo"
+      },
+      {
+        "id": "footer_blurb",
+        "type": "text",
+        "label": "Footer Blurb"
+      },
+      {
+        "type": "header",
+        "content": "Footer Social Media Icons"
+      },
+      {
+        "id": "footer-facebook-icon",
+        "type": "text",
+        "label": "Footer Facebook Icon"
+      },
+      {
+        "id": "footer-facebook-icon-link",
+        "type": "text",
+        "label": "Footer Facebook Icon Link"
+      },
+      {
+        "id": "footer-instagram-icon",
+        "type": "text",
+        "label": "Footer instagram Icon"
+      },
+      {
+        "id": "footer-instagram-icon-link",
+        "type": "text",
+        "label": "Footer Instagram Icon Link"
+      },
+      {
+        "id": "footer-twitter-icon",
+        "type": "text",
+        "label": "Footer twitter Icon"
+      },
+      {
+        "id": "footer-twitter-icon-link",
+        "type": "text",
+        "label": "Footer twitter Icon Link"
+      },
+      {
+        "id": "footer-linkedin-icon",
+        "type": "text",
+        "label": "Footer LinkedIn Icon"
+      },
+      {
+        "id": "footer-linkedin-icon-link",
+        "type": "text",
+        "label": "Footer LinkedIn Icon Link"
+      },
+      {
+        "id": "footer-youtube-icon",
+        "type": "text",
+        "label": "Footer YouTube Icon"
+      },
+      {
+        "id": "footer-youtube-icon-link",
+        "type": "text",
+        "label": "Footer YouTube Icon Link"
+      },
+      {
+        "type": "header",
+        "content": "Footer Newsletter"
+      },
+      {
+        "id": "footer_newsletter_header",
+        "type": "text",
+        "label": "Footer Newsletter Header"
+      },
+      {
+        "id": "footer_newsletter_text",
+        "type": "text",
+        "label": "Footer Newsletter Text"
+      }
+    ]
+  }  
+]

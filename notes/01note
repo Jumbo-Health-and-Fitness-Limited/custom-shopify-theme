@@ -1,0 +1,261 @@
+> (It's good to have products already uploaded through the shopify admin)
+
+> Upload the theme through the shopify admin
+
+> (It's also good to have collections and navigations through the shopify admin)
+
+> Create a private app. Give it any name - should have the necessary access
+  theme access to read/ write; access to theme data as well.
+
+> In terminal: create a config file -> config.yml
+{
+    development:
+        password: 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
+        theme_id: 80704307271
+        store: ankara-fashion-store.myshopify.com
+}
+
+> run theme download which will download the files
+
+> Add the neccesary styels.css (custom css last after cdn stuffs) 
+  and js files (in theme.js -last after cdn stuffs - which you newly create in the asset folder)
+  to the theme.liquid file in layout folder. JQuery first.
+
+
+--- Header, (Menu), Contact Page, about Page, Homepage - carousel, products, category, Footer, 
+    Collection Page, Product page, Variants dropdown, cart page, product description, 
+    add to cart button, Header linkss - account, login, cart ---
+
+> Bascically, add a header.liquid in section folder (you can do customizable settings)
+  include in theme.liquid like this {% section 'header' %}
+
+> Header has the menu. Better added as a snippet in snippets folder as menu.liquid
+  Add to the designated file in other snippets or section folder. like this {% include 'menu' %}
+
+> To allow for custimazation for the menu. Create a schema like this. In theme custimzation, 
+  Schema in section is set in settings while schema in settins_schema.json is set in Theme Settings 
+{
+  {
+      {% schema %}
+        {
+            "name": "Main Menu", // name in the settings area so as to access the editable settings
+            "settings": [
+                {
+                    "type": "link_list", // this lists the created link_list which are in the nav
+                    "id":   "main_linklist", // puts input in template ilike setting.sections.main_linklist
+                    "label":    "Menu", // name that's called in the settings area for this type
+                    "default": "main-menu" // using main-menu in navigation as default.
+                }
+            ]
+            
+        }
+    {% endschema %}
+  }
+
+   // another schema - more than one settings
+   {
+         {% schema %}
+            {
+                "name": "Footer",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "facebook",
+                        "label": "Facebook Link"
+                    },
+
+                    {
+                        "type": "text",
+                        "id": "instagram",
+                        "label": "Instagram Link"
+                    },
+
+                    {
+                        "type": "text",
+                        "id": "twitter",
+                        "label": "Twitter Link"
+                    }
+                    
+                ],
+                "blocks": [
+                    {
+                    "type": "text",
+                    "name":"Footer Link",
+                    "settings": [
+                        {
+                        "type": "text",
+                        "id": "footer_text",
+                        "label": "Text"
+                        },
+                        {
+                        "type": "url",
+                        "id": "footer_link",
+                        "label": "Link"
+                        }
+                    ]
+                    }
+                ]
+                
+            }
+         {% endschema %}
+   }
+
+   // another schema - let's talk about images
+   {
+         {% schema %}
+            {
+                "name": "Homepage Carousel",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "slide-1",
+                        "label": "Slide 1"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "slide-2",
+                        "label": "Slide 2"
+                    }
+                ]
+            }
+        {% endschema %}
+   }
+
+   // another schema, more 'types' more settings attributes
+   {  
+        {% schema %}
+            {
+                "name": "Homepage Products",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Heading",
+                        "default": "Trending Products"
+                    },
+
+                    {
+                        "type": "collection",
+                        "id": "collection",
+                        "label": "Collection"
+                    },
+
+                    {
+                        "type": "range",
+                        "id": "product_limit",
+                        "label": "Product Limit",
+                        "min": 3,
+                        "max": 9,
+                        "default": 6
+                    }
+
+
+                ]
+            }
+        {% endschema %}
+   }
+
+   > Theme settings for pages is set through the settings_schema.json.
+     ...for about us page...
+      {
+            "name": "About Page",
+            "settings": [
+            {
+                "type": "image_picker",
+                "id": "about_img",
+                "label": "About Page Image"
+            }
+            ]
+      }
+        ...for contact us page...
+        {
+            "name": "Contact Page",
+            "settings": [
+            {
+                "type": "text",
+                "id": "address",
+                "label": "Address"
+            },
+            {
+                "type": "text",
+                "id": "phone",
+                "label": "Phone Number"
+            },
+            {
+                "type": "text",
+                "id": "email",
+                "label": "Email Address"
+            }
+            ]
+        }
+
+}
+
+> Using schema settings input in templates
+    {% schema %}
+        {
+            "name": "Homepage Carousel",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "slide-1",
+                    "label": "Slide 1"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "slide-2",
+                    "label": "Slide 2"
+                }
+            ]
+        }
+    {% endschema %}
+
+    ...in template...
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="{{section.settings.slide-1 | img_url: '1920x'}}">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="{{section.settings.slide-2 | img_url: '1920x'}}">
+            </div>
+        </div>
+
+> Working with forms
+  ---contact---
+  {
+      {% form 'contact'%}
+            {% if form.posted_successfully? %}
+                <p class="note form-success" > Thank you for contacting us.  </p> 
+            {% endif %}
+
+            <div class="form-group">
+              <input type="text" placeholder="Your Name" class="form-control" name="contact[name]" id="name">
+            </div>
+            
+            <div class="form-group">
+              <input type="email" placeholder="Your Email" class="form-control" name="contact[email]" id="email">
+            </div>
+            
+            <div class="form-group">
+              <input type="text" placeholder="Subject" class="form-control" name="contact[subject]" id="subject">
+            </div>
+            
+            <div class="form-group">
+              <textarea rows="6" placeholder="Message" class="form-control" name="contact[message]" id="message"></textarea> 
+            </div>
+
+            <div>
+              <input type="submit" id="contact-submit" class="btn btn-transparent" value="Submit">
+            </div>
+        
+        {% endform %}
+  }
+  ---store front password---
+  {
+      {% form 'storefront_password' %}
+        {{ form.errors | default_errors }}
+        <label for="password">Enter store using password:</label>
+        <input type="password" name="password" id="password" autofocus="" />
+        <input class="btn btn-primary" name="commit" type="submit" value="Enter" />
+      {% endform %}
+  }
