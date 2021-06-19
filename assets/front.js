@@ -354,3 +354,65 @@ function utils() {
         }, 1000);
     }
 }
+
+function getVariantFromOptions() {
+    let variantArr = []
+    $(".bs-select").map(function(i, el) {
+      variant = {value: $(el).val(), index: $(el).data('index')};
+      if (!_.isEmpty(variant.index)) {
+        variantArr.push(variant)
+      }
+    });
+    return variantArr;
+  }
+  
+  function updateHistoryState(variant) {
+    if (!history.replaceState || !variant) {
+      return;
+    }
+  
+    var newurl =
+      window.location.protocol +
+      '//' +
+      window.location.host +
+      window.location.pathname +
+      '?variant=' +
+      variant.id;
+    
+    window.history.replaceState({ path: newurl }, '', newurl);
+  }
+  
+  $(document).ready(function () {
+      $('#product-size').change(function() {
+        var selectedValues = getVariantFromOptions();
+        var variants = window.product.variants;
+  
+        // Search for product variants based on what was selected in the dropdowns
+        var found = _.find(variants, function(variant) {
+          return selectedValues.every(function(values) {
+            return _.isEqual(variant[values.index], values.value);
+          });
+        });
+  
+        updateHistoryState(found);
+        $('#variant-id').val(found.id);
+      });
+  });
+  
+  // Sorting collection
+  let sortBy = false
+  
+  if (window.location.search.length) {
+    sortBy = new URLSearchParams(window.location.search).get('sort_by')
+  }
+  
+  //preserve current selection
+  // set sort value to present query
+  if(sortBy) {
+    $('#sorting').val(sortBy)
+  }
+  
+  $('#sorting').change(function(e) {
+    const { value } = e.currentTarget
+    window.location = `?sort_by=${value}`
+  })
